@@ -76,5 +76,6 @@ dependencies {
     ksp (libs.hilt.android.compiler)
     implementation(libs.coil)
     implementation (libs.accompanist.systemuicontroller)
+    implementation ("androidx.core:core-splashscreen:1.0.0")
 
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="App.splash.Theme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#111211</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/news__3_</item>
+        <item name="postSplashScreenTheme">@style/Theme.RoomDatabase</item>
+
+    </style>
+</resources>
