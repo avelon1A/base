@@ -1,13 +1,14 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlin.serialization)
     id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
     id("com.google.devtools.ksp") version "2.0.0-1.0.21"
 }
 
 android {
     namespace = "com.example.roomdatabase"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.roomdatabase"
@@ -61,7 +62,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.retrofit)
+    implementation(libs.androidx.navigation.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -69,13 +71,42 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //room dependency
     implementation (libs.androidx.room.runtime)
     annotationProcessor (libs.androidx.room.compiler)
     ksp (libs.androidx.room.compiler)
+    //hilt dependency
     implementation (libs.hilt.android)
     ksp (libs.hilt.android.compiler)
     implementation(libs.coil)
+
+    //    ui
     implementation (libs.accompanist.systemuicontroller)
     implementation ("androidx.core:core-splashscreen:1.0.0")
+
+    //network retrofit and ktor
+    implementation(libs.retrofit)
+    implementation("io.ktor:ktor-client-core:3.0.1")
+    implementation("io.ktor:ktor-client-android:3.0.1")
+    implementation("io.ktor:ktor-client-serialization:3.0.1")
+    implementation("io.ktor:ktor-client-logging:3.0.1")
+    implementation("io.ktor:ktor-client-content-negotiation:3.0.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.1")
+    implementation("io.ktor:ktor-client-cio:3.0.1")
+    implementation("io.ktor:ktor-client-okhttp:3.0.1")
+
+
+    //koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.android.compat)
+    implementation(libs.koin.androidx.workmanager)
+    implementation(libs.koin.androidx.navigation)
+    implementation(libs.koin.core)
+    implementation(libs.koin.androidx.compose)
+
+
+    implementation(libs.androidx.work.runtime)
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
 }
