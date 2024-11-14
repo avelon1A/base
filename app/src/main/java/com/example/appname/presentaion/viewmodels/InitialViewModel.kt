@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.appname.domain.model.User
+import com.example.appname.domain.model.authWithToken
 import com.example.appname.domain.usecase.GetUserDataUseCase
 import com.example.appname.domain.usecase.TokenUseCases
 import com.example.appname.presentaion.navigation.Screens
@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import com.example.appname.uitl.Result
 import com.example.appname.uitl.onError
 import com.example.appname.uitl.onSuccess
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -24,24 +25,26 @@ class InitialViewModel(
     private val getUserDataUseCase: GetUserDataUseCase,
     private val tokenUseCases: TokenUseCases,
 ) : ViewModel() {
-    private val _userState = MutableStateFlow<Result<User, NetworkError>?>(null)
-    val userState: StateFlow<Result<User, NetworkError>?> get() = _userState
+    private val _userState = MutableStateFlow<Result<authWithToken, NetworkError>?>(null)
+    val userState: StateFlow<Result<authWithToken, NetworkError>?> get() = _userState
 
     var splashCondition by mutableStateOf(true)
         private set
-    var startDestination by mutableStateOf<Screens>(Screens.LoginScreen)
+
+     var _startDestination by mutableStateOf<Screens>(Screens.SplashScreen)
         private set
 
 
     init {
         viewModelScope.launch {
+
             tokenUseCases.getToken().collect { token ->
                 if (token != null) {
                     fetchUserData(token)
                 }
                 else{
+                    _startDestination = Screens.LoginScreen
                     splashCondition = false
-                    startDestination = Screens.LoginScreen
                 }
             }
         }
@@ -52,14 +55,15 @@ class InitialViewModel(
             val user = getUserDataUseCase(token)
             user.onSuccess {
                 _userState.value = user
+                _startDestination = Screens.MainScreen
                 splashCondition = false
-                startDestination = Screens.MainScreen
             }
             user.onError {
                 _userState.value = user
+                _startDestination = Screens.LoginScreen
                 splashCondition = false
-                startDestination = Screens.LoginScreen
             }
+
 
         }
     }

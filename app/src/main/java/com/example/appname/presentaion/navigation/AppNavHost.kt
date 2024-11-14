@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.appname.presentaion.screens.LoginScreen
 import com.example.appname.presentaion.screens.MainScreen
+import com.example.appname.presentaion.screens.TransparentScreen
 
 @Composable
 fun AppNavHost(
@@ -29,6 +30,9 @@ fun AppNavHost(
         }
         composable<Screens.MainScreen> {
             MainScreen()
+        }
+        composable<Screens.SplashScreen> {
+            TransparentScreen()
         }
 
     }

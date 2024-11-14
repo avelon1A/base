@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appname.domain.model.LoginRequest
 import com.example.appname.domain.model.LoginRespose
-import com.example.appname.domain.model.User
 import com.example.appname.domain.usecase.GetUserDataUseCase
 import com.example.appname.domain.usecase.LoginUseCases
 import com.example.appname.domain.usecase.TokenUseCases
@@ -31,6 +30,7 @@ class MainViewModel(private val loginUseCases: LoginUseCases,
 
 
     fun login(LoginRequest: LoginRequest) {
+        Log.d("login","$LoginRequest")
         viewModelScope.launch {
                 val user = loginUseCases.login(LoginRequest)
                 user.onSuccess {

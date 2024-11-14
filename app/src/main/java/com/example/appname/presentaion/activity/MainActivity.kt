@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                     AppNavHost(
                         navController = navController,
                         modifier = Modifier.padding(),
-                        startDestination = Screens.LoginScreen
+                        startDestination = viewModel._startDestination
                     )
                 }
             }
