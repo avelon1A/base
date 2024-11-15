@@ -3,7 +3,6 @@ package com.example.appname.presentaion.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.example.appname.presentaion.navigation.AppNavHost
-import com.example.appname.presentaion.navigation.Screens
 import com.example.appname.presentaion.screens.MainScreen
 import com.example.appname.presentaion.theme.AppTheme
 import com.example.appname.presentaion.viewmodels.InitialViewModel
@@ -27,7 +25,7 @@ class MainActivity : ComponentActivity() {
 
         installSplashScreen().apply {
             setKeepOnScreenCondition {
-                viewModel.splashCondition
+                viewModel._startDestination == null
             }
         }
         setContent {
@@ -37,11 +35,14 @@ class MainActivity : ComponentActivity() {
                     contentAlignment = Alignment.Center
                 ) {
                     val navController = rememberNavController()
-                    AppNavHost(
-                        navController = navController,
-                        modifier = Modifier.padding(),
-                        startDestination = viewModel._startDestination
-                    )
+                    if(viewModel._startDestination != null){
+                        AppNavHost(
+                            navController = navController,
+                            modifier = Modifier.padding(),
+                            startDestination = viewModel._startDestination!!
+                        )
+                    }
+
                 }
             }
         }

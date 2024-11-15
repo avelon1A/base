@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlin.serialization)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21"
     id("com.google.devtools.ksp") version "2.0.0-1.0.21"
 }
 
@@ -83,18 +83,18 @@ dependencies {
 
     //    ui
     implementation (libs.accompanist.systemuicontroller)
-    implementation ("androidx.core:core-splashscreen:1.0.0")
+    implementation (libs.androidx.core.splashscreen)
 
     //network retrofit and ktor
     implementation(libs.retrofit)
-    implementation("io.ktor:ktor-client-core:3.0.1")
-    implementation("io.ktor:ktor-client-android:3.0.1")
-    implementation("io.ktor:ktor-client-serialization:3.0.1")
-    implementation("io.ktor:ktor-client-logging:3.0.1")
-    implementation("io.ktor:ktor-client-content-negotiation:3.0.1")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.1")
-    implementation("io.ktor:ktor-client-cio:3.0.1")
-    implementation("io.ktor:ktor-client-okhttp:3.0.1")
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.okhttp)
 
 
     //koin
@@ -107,6 +107,6 @@ dependencies {
 
 
     implementation(libs.androidx.work.runtime)
-    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    implementation (libs.androidx.datastore.preferences)
 
 }

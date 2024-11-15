@@ -9,14 +9,11 @@ import com.example.appname.domain.model.authWithToken
 import com.example.appname.domain.usecase.GetUserDataUseCase
 import com.example.appname.domain.usecase.TokenUseCases
 import com.example.appname.presentaion.navigation.Screens
-import com.example.appname.presentaion.screens.LoginScreen
-import com.example.appname.presentaion.screens.MainScreen
 import com.example.appname.uitl.NetworkError
-import kotlinx.coroutines.flow.MutableStateFlow
 import com.example.appname.uitl.Result
 import com.example.appname.uitl.onError
 import com.example.appname.uitl.onSuccess
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -31,7 +28,7 @@ class InitialViewModel(
     var splashCondition by mutableStateOf(true)
         private set
 
-     var _startDestination by mutableStateOf<Screens>(Screens.SplashScreen)
+     var _startDestination by mutableStateOf<Screens?>(null)
         private set
 
 
@@ -55,7 +52,9 @@ class InitialViewModel(
             val user = getUserDataUseCase(token)
             user.onSuccess {
                 _userState.value = user
-                _startDestination = Screens.MainScreen
+                if(_startDestination == null){
+                    _startDestination = Screens.MainScreen
+                }
                 splashCondition = false
             }
             user.onError {

@@ -127,7 +127,6 @@ fun LoginScreen(viewModel: MainViewModel = getViewModel()) {
                 }
                 is Result.Success -> {
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("User ID: ${state.data.email}")
                     Text(text = "Name: ${state.data.firstName} ${state.data.lastName}")
                     Text("Email: ${state.data.email}")
                 }
