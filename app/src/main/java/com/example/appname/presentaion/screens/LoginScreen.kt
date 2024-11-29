@@ -26,7 +26,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -45,14 +44,14 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun LoginScreen(viewModel: MainViewModel = getViewModel()) {
     val user by viewModel.userState.collectAsState()
-    val snackbarHostState = remember { SnackbarHostState() }
+    val snackBarHostState = remember { SnackbarHostState() }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFDFFFD6))
@@ -105,7 +104,8 @@ fun LoginScreen(viewModel: MainViewModel = getViewModel()) {
                     if (email.isNotEmpty() && password.isNotEmpty()) {
                         viewModel.login(LoginRequest(email, password))
                     } else {
-                        Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 },
                 modifier = Modifier
@@ -119,18 +119,20 @@ fun LoginScreen(viewModel: MainViewModel = getViewModel()) {
 
             when (val state = user) {
                 is Result.Error -> {
-                    LaunchedEffect(snackbarHostState) {
-                        snackbarHostState.showSnackbar(
+                    LaunchedEffect(snackBarHostState) {
+                        snackBarHostState.showSnackbar(
                             message = "Error: ${state.error}",
                         )
                     }
                 }
+
                 is Result.Success -> {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(text = "Name: ${state.data.firstName} ${state.data.lastName}")
                     Text("Email: ${state.data.email}")
                 }
-                else -> { }
+
+                else -> {}
             }
         }
     }

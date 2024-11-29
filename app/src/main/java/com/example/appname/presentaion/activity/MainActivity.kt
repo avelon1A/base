@@ -16,13 +16,16 @@ import com.example.appname.presentaion.navigation.AppNavHost
 import com.example.appname.presentaion.screens.MainScreen
 import com.example.appname.presentaion.theme.AppTheme
 import com.example.appname.presentaion.viewmodels.InitialViewModel
+import com.microsoft.clarity.Clarity
+import com.microsoft.clarity.ClarityConfig
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
     private val viewModel: InitialViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val config = ClarityConfig("p1i0y081y9")
+        Clarity.initialize(applicationContext, config)
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel._startDestination == null
@@ -42,7 +45,6 @@ class MainActivity : ComponentActivity() {
                             startDestination = viewModel._startDestination!!
                         )
                     }
-
                 }
             }
         }

@@ -109,4 +109,7 @@ dependencies {
     implementation(libs.androidx.work.runtime)
     implementation (libs.androidx.datastore.preferences)
 
+
+    implementation ("com.microsoft.clarity:clarity:2.5.2")
+
 }
