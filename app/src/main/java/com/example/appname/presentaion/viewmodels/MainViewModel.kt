@@ -29,10 +29,10 @@ class MainViewModel(private val loginUseCases: LoginUseCases,
 
 
 
-    fun login(LoginRequest: LoginRequest) {
+    fun login(loginRequest: LoginRequest) {
         Log.d("login","$LoginRequest")
         viewModelScope.launch {
-                val user = loginUseCases.login(LoginRequest)
+                val user = loginUseCases.login(loginRequest)
                 user.onSuccess {
                     _userState.value = user
                     tokenUseCases.saveToken(it.accessToken)
