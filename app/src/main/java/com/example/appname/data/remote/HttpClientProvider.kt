@@ -16,7 +16,7 @@ object HttpClientProvider {
                 json(
                     json = kotlinx.serialization.json.Json {
                         ignoreUnknownKeys = true
-                        prettyPrint = true;
+                        prettyPrint = true
                         isLenient = true
                     }
                 )

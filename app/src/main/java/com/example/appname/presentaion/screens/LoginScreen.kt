@@ -1,6 +1,7 @@
 package com.example.appname.presentaion.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,19 +37,23 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appname.domain.model.LoginRequest
-import com.example.appname.presentaion.viewmodels.MainViewModel
+import com.example.appname.presentaion.viewmodels.LoginViewModel
 import com.example.appname.uitl.Result
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun LoginScreen(viewModel: MainViewModel = getViewModel()) {
+fun LoginScreen(viewModel: LoginViewModel = koinViewModel<LoginViewModel>()) {
     val user by viewModel.userState.collectAsState()
     val snackBarHostState = remember { SnackbarHostState() }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(user) {
+        Log.d("LaunchedEffect", "User State: ${user?.toString() ?: "null"}")
+    }
 
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
