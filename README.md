@@ -22,8 +22,8 @@ Before you can build and run the app, ensure you have the following installed:
 
 - Android Studio latest version
 - Android SDK 31 or later
+- JDK 17
 - Kotlin 2.1.0
-
 
 ### Project Setup
 
