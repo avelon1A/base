@@ -16,6 +16,7 @@ This is a base Android application that serves as a starting point for developin
 
 ## Getting Started
 
+
 ### Prerequisites
 
 Before you can build and run the app, ensure you have the following installed:
