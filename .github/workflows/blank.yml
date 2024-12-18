@@ -11,13 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        api-level: [30]
-        target: [debug, release]
-        abi: [x86_64]
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
