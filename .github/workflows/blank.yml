@@ -58,3 +58,15 @@ jobs:
         name: app-${{ matrix.target }}
         path: app/build/outputs/
 
+    - name: Send Email with Artifacts
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.GMAIL_USERNAME }}
+        password: ${{ secrets.GMAIL_PASSWORD }}
+        subject: "Build Artifacts"
+        body: "Please find the attached build artifacts."
+        to: "amanavelon@gmail.com"
+        from: ${{ secrets.GMAIL_USERNAME }}
+        attachments: app/build/outputs/**/*
